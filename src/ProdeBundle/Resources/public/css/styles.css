@@ -1,0 +1,244 @@
+body {
+  margin: 1.5em 4em;
+  font-size: 15px;
+}
+
+
+/* For Firefox */
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.contenedor {
+  padding: 25px;
+}
+
+.contentNav {
+  grid-area: contentNav;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 18px;
+  background-color: #fff;
+  border: 2px solid #e6e8e8;
+  text-align: center;
+  font-weight: 800;
+  font-size: 180%;
+  color: #fff;
+  background-color: #434277;
+}
+
+
+.box {
+  background-color: #ececec;
+  color: #292525;
+  border-radius: 2px;
+  padding: 15px;
+  font-size: 105%;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: #e8e3e3;
+  color: #50506b;
+}
+
+.content {
+  grid-area: content;
+  position: relative;
+  color: #50506b;
+  padding-top: 0;
+}
+
+.content form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr;
+  padding: 15px;
+}
+
+.content form *{
+
+  margin: 5px;
+}
+
+#remember_me {
+  justify-self:  end;
+  align-self: center;
+}
+
+input[type=checkbox] {
+  margin: 0;
+}
+
+.header {
+  grid-area: header;
+  font-size: 200% !important;
+  padding: 30px;
+
+}
+
+.grupos {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  padding: 18px;
+  background-color: #fff;
+  border: 2px solid #e6e8e8;
+  margin-top: 5px;
+  margin-bottom: 2px;
+   font-weight: 600;
+   color: #6968af;
+}
+
+.btn-grupo{
+  text-align: center;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+
+
+.header,
+.footer {
+  background-color: #8a97f1;
+  font-family: 'Black Han Sans', sans-serif;
+  color: #fff;
+ }
+
+
+.wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 0.6fr 1fr 1fr;
+  
+    grid-template-areas:
+    "header  header  header"
+
+    "sidebar content content"
+    "footer  footer  footer";
+    background-color: #fbf2f2;
+    color: #292525;
+  }
+
+
+
+
+
+.partidos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
+
+}
+
+.partido {
+
+  display: grid;
+  grid-template-areas:
+    "bandera  equipo  menos resultado mas"
+    "bandera  equipo  menos resultado mas"
+    "fecha fecha fecha fecha fecha";
+  padding: 0.1em 0.7em;
+  justify-content: center;
+  justify-items: center;
+  grid-template-columns: 0.6fr 3.5fr 1fr 1fr 1fr;
+  border: 2px solid #e6e8e8;
+  background-color: #fff;
+  align-items: center;
+
+}
+
+.resultado {
+
+  background-color: #e6e8e8;
+  border: 0.2px solid #b3b3b3;
+  width: 50px;
+  margin: 0;
+  padding: 0.5em 0em;
+  text-align: center; 
+  box-sizing: border-box;
+
+
+}
+
+.partido img {
+  height: 30px;
+}
+
+.fecha {
+  justify-self: center;
+  grid-area: fecha;
+  color: grey;
+  border-top: 0.2px solid #b3b3b3;
+
+  
+
+}
+
+
+.tabla {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr 1fr 1fr 1fr;
+  border-radius: 8px;
+}
+
+.tabla div {
+  background-color: #fff;
+  border: 0.2px solid #f5f3f3; 
+  padding: 2px;
+}
+.mas, 
+.menos {
+      background-color: #e6e8e8;
+      border: 0.2px solid #b3b3b3;
+      justify-self:end;
+       text-align: center; 
+
+      margin: 0.3em 0;
+      padding: 0.5em 10px ;
+      width: 40px;
+          
+
+}
+
+.mas {
+  justify-self:start;
+}
+
+
+.glyphicon-plus-sign {
+
+    padding-right: 0.4em;
+}
+
+.glyphicon-minus-sign {
+    padding-left: 0.4em;
+}
+
+
+.formularioRegistro {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+
+}
+
+@media screen and (max-width: 720px) {
+    .partidos {
+          grid-template-columns: 1fr;
+
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .sidebar {
+        display: none;
+    }
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+}

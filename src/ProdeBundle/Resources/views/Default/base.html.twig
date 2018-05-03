@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}{% endblock %} | Prode</title>  
+             {% block stylesheets %}         
+            	<link href="{{ asset('bundles/prode/css/styles.css') }}"
+				rel="stylesheet" type="text/css" />
+                <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans" rel="stylesheet">
+              
+            {% endblock %}
+
+    </head>
+    
+    <body id="{% block id '' %}">
+
+        <div class="contenedor">
+            {% block body %}{% endblock %}
+    	    <div class="wrapper">
+        	    <div class="box header">PRODE PERIO RUSIA 2018
+                    {% block header %}
+                    {% endblock %}    
+                </div>
+        	    <div class="box sidebar">
+                    {% block sidebar %}
+                    {% endblock %} 
+                </div>
+
+
+            	<div class="box content">
+                    {% block content %}
+                    {% endblock %}    
+        	    </div>
+
+    	    </div>
+                            
+                <div class="box footer">
+                    {% block footer %}
+                    {% endblock %}
+                </div>
+            {% block javascripts %}{% endblock %}
+        </div>
+    </body>
+</html>

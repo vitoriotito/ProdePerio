@@ -1,0 +1,12 @@
+prode_homepage:
+    path:     /
+    defaults: { _controller: ProdeBundle:Default:index }
+
+prode_pronosticos:
+    path:     /pronosticosGrupos
+    defaults: { _controller: ProdeBundle:Default:pronosticosGrupos }    
+
+prode_registro:
+    path:     /registro
+    defaults: { _controller: ProdeBundle:Default:registro }    
+
