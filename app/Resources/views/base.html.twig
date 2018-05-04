@@ -7,6 +7,7 @@
             	<link href="{{ asset('bundles/prode/css/styles.css') }}"
 				rel="stylesheet" type="text/css" />
                 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans" rel="stylesheet">
+                <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
               
             {% endblock %}
 
@@ -17,10 +18,33 @@
         <div class="contenedor">
             {% block body %}{% endblock %}
     	    <div class="wrapper">
-        	    <div class="box header">PRODE PERIO RUSIA 2018
+        	        <div class="box header">
+                        <div class="header-titulo">
+                            PRODE PERIO RUSIA 2018
+                        </div>
+                        <div class="header-center">
+                        </div>    
+                        <div class="header-login">
+                           {% if app.user %}
+                                <div class="btn-header">
+                                    Salir
+                                </div>
+                             {% else %}
+                                <a href="{{ path('login') }}" class="btn-header">
+                                    Ingresar
+                                </a>
+                                <a href="{{ path('registro') }}" class="btn-header">
+                                    Registrarse
+                                </a>
+                           {% endif %}
+                            
+                        </div>
+                                
                     {% block header %}
+
                     {% endblock %}    
                 </div>
+
         	    <div class="box sidebar">
                     {% block sidebar %}
                     {% endblock %} 

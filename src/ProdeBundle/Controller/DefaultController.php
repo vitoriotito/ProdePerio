@@ -27,4 +27,9 @@ class DefaultController extends Controller
 	{
 		return $this->render('ProdeBundle:FOS:layout.html.twig');
 	}
+
+	public function loginAction()
+	{
+		return $this->render('ProdeBundle:FOS:layout.html.twig');
+	}
 }
