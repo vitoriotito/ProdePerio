@@ -4,7 +4,15 @@ prode_homepage:
 
 prode_pronosticos:
     path:     /pronosticosGrupos
-    defaults: { _controller: ProdeBundle:Default:pronosticosGrupos }    
+    defaults: { _controller: ProdeBundle:Default:pronosticosGrupos } 
+
+grupo:
+    path:     /grupo/{grupo}
+    defaults: { _controller: ProdeBundle:Default:grupo }    
+
+grupoA:
+    path:     /grupo/A
+    defaults: { _controller: ProdeBundle:Default:grupo } 
 
 registro:
     path:     /registro
@@ -12,8 +20,12 @@ registro:
 
 login:
     path:     /login
-    defaults: { _controller: FOSUserBundle:Security:login}  
+    defaults: { _controller: FOSUserBundle:Security:login }      
 
 logout:
     path:     /logout
-    defaults: { _controller: FOSUserBundle:Security:logout}      
+    defaults: { _controller: FOSUserBundle:Security:logout }       
+
+guardar_grupo:
+  pattern:  /guardarGrupo
+  defaults: { _controller: ProdeBundle:Default:guardarGrupo }

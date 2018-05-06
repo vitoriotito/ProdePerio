@@ -19,23 +19,39 @@
             {% block body %}{% endblock %}
     	    <div class="wrapper">
         	        <div class="box header">
-                        <div class="header-titulo">
+                        <a href="{{ path('prode_homepage') }}" class="header-titulo">
                             PRODE PERIO RUSIA 2018
-                        </div>
+                        </a>
                         <div class="header-center">
                         </div>    
-                        <div class="header-login">
+                        
                            {% if app.user %}
-                                <div class="btn-header">
+                            <div class="text-header">
+                                Hola {{app.user.nombre}}
+                            </div>
+                            <div class="header-login">
+                                <a href="{{ path('grupoA') }}" class="btn-header">
+                                   Mis grupos
+                                </a>                  
+                            </div>
+                             <div class="header-login">
+                                <a href="{{ path('logout') }}" class="btn-header">
                                     Salir
-                                </div>
+                                </a>
+                            
+                             </div>     
                              {% else %}
-                                <a href="{{ path('login') }}" class="btn-header">
-                                    Ingresar
-                                </a>
-                                <a href="{{ path('registro') }}" class="btn-header">
-                                    Registrarse
-                                </a>
+                                 <div></div>
+                                <div class="header-login">
+                                    <a href="{{ path('login') }}" class="btn-header">
+                                        Ingresar
+                                    </a>
+                                </div>   
+                                <div class="header-login"> 
+                                    <a href="{{ path('registro') }}" class="btn-header">
+                                        Registrarse
+                                    </a>
+                                </div>    
                            {% endif %}
                             
                         </div>
@@ -43,8 +59,7 @@
                     {% block header %}
 
                     {% endblock %}    
-                </div>
-
+        
         	    <div class="box sidebar">
                     {% block sidebar %}
                     {% endblock %} 
@@ -62,7 +77,33 @@
                     {% block footer %}
                     {% endblock %}
                 </div>
-            {% block javascripts %}{% endblock %}
+            {% block javascripts %}
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+               <script src="{{ asset('bundles/prode/js/scripts.js') }}"></script>
+               
+               <script type="text/javascript">
+
+                    $("#guardar").on("click", function() { 
+                        console.log("{{ (path('prode_homepage')) }}");
+                        var r1 = $('input[id="resultado1"]').val();
+                        var r2 = $('input[id="resultado2"]').val(); 
+                        $.ajax({
+                                    url: '{{ (path('prode_pronosticos')) }}',
+                                    type: "POST",
+                                    dataType: "json",
+                                     data: JSON.stringify({ r1: r1, r2: r2 }), 
+                                    async: true,
+                                    success: function (data)
+                                    {
+                                        console.log(data)
+                                        $('div#ajax-results').html(data.output);
+
+                                    }
+                                });
+                        });
+               </script>
+
+            {% endblock %}
         </div>
     </body>
 </html>

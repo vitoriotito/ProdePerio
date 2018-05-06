@@ -23,7 +23,8 @@ class Equipo {
 	protected $nombre;
 	/** @ORM\Column(type="string") */
 	protected $bandera;
-
+    /** @ORM\Column(type="string") */
+    protected $grupo;
 
 
 

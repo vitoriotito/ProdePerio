@@ -5,10 +5,10 @@
 	 {{ parent() }}
 	
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+     
 {% endblock %}
 
 {% block header %}
-
 
 {% endblock %}	
 
@@ -20,106 +20,73 @@
 
 
 	<div class="contentNav">
-
+		<div></div>
 		<div class="banner"> Próximos Partidos </div>
-
-
+		<div class= "left-banner">
+			 {% if app.user %}
+			<a href="#"  data-url="{{ (path('prode_homepage')) }}" class="btn-nav" id="guardar">GUARDAR</a>
+			 {% else %}
+			 	<div></div>
+			 {% endif %}
+		</div>
 	</div>
+	
+	
 
 	<div class="partidos">
+		{% for partido in partidos %}
 		  <div class="partido">
 
-		  	<img src="{{ asset('bundles/prode/img/5Y6kOqiOIv2C1sP9C_BWtA_48x48.png') }}">
-		  	<span>EEUU</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<img src="{{ asset('bundles/prode/img/KnSUdQWiGRoy89q4x85IgA_48x48.png') }}">
+		  	<img src="{{ asset('bundles/prode/img/')}}{{partido.b1}}">
+		  	<span>{{partido.e1}}</span>
+		  	<span class="menos" id="menos1" role="button"
+		  	onselectstart="return false;">-</span>
+		  	<input class="resultado" id="resultado1" type="number" value="{{partido.resultado1}}" max="15">
+		  	<span class="mas" id="mas1" role="button"		
+ 			onselectstart="return false;">+</span>
+		  	<img src="{{ asset('bundles/prode/img/') }}{{partido.b2}}">
 
-		  	<span>Uruguay</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<div class="fecha"> 15/7 17:00</div>
+		  	<span>{{partido.e2}}</span>
+		  	<span class="menos" id="menos2">-</span>
+		  	<input class="resultado" id="resultado2" type="number" value="{{partido.resultado2}}" max="15">
+		  	<span class="mas" id="mas2">+</span>
+		
+		  	<div class="fecha"> {{ partido.fecha |date('d/m H:i  -  ')}} Grupo {{partido.grupo}}</div>
 	
 		  </div>
-
-		  <div class="partido">
-		  	<img src="{{ asset('bundles/prode/img/5Y6kOqiOIv2C1sP9C_BWtA_48x48.png') }}">
-		  	<span>Rusia</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<img src="{{ asset('bundles/prode/img/KnSUdQWiGRoy89q4x85IgA_48x48.png') }}">
-		  	<span>Uruguay</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<div></div><div class="fecha">15/7 17:00</div>
+		{% endfor %}
+		  
 	
-		  </div>
-
-		  <div class="partido">
-		  	<img src="{{ asset('bundles/prode/img/5Y6kOqiOIv2C1sP9C_BWtA_48x48.png') }}">
-		  	<span>Rusia</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<img src="{{ asset('bundles/prode/img/KnSUdQWiGRoy89q4x85IgA_48x48.png') }}">
-		  	<span>Uruguay</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<div></div><div class="fecha">15/7 17:00</div>
-	
-		  </div>
-
-		  <div class="partido">
-		  	<img src="{{ asset('bundles/prode/img/5Y6kOqiOIv2C1sP9C_BWtA_48x48.png') }}">
-		  	<span>Rusia</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<img src="{{ asset('bundles/prode/img/KnSUdQWiGRoy89q4x85IgA_48x48.png') }}">
-		  	<span>Uruguay</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<div></div><div class="fecha">15/7 17:00</div>
-	
-		  </div>
-
-		  <div class="partido">
-		  	<img src="{{ asset('bundles/prode/img/5Y6kOqiOIv2C1sP9C_BWtA_48x48.png') }}">
-		  	<span>Rusia</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<img src="{{ asset('bundles/prode/img/KnSUdQWiGRoy89q4x85IgA_48x48.png') }}">
-		  	<span>Uruguay</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<div></div><div class="fecha">15/7 17:00</div>
-	
-		  </div>
-
-		  <div class="partido">
-		  	<img src="{{ asset('bundles/prode/img/5Y6kOqiOIv2C1sP9C_BWtA_48x48.png') }}">
-		  	<span>Rusia</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<img src="{{ asset('bundles/prode/img/KnSUdQWiGRoy89q4x85IgA_48x48.png') }}">
-		  	<span>Uruguay</span>
-		  	<span class="menos">-</span>
-		  	<input class="resultado" id="number" type="number">
-		  	<span class="mas">+</span>
-		  	<div></div><div class="fecha">15/7 17:00</div>
-	
-		  </div>
+	</div>
 {% endblock %}	
 
 {% block footer %}
 
+{% endblock %}	
+
+{% block javascripts %}
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+               <script src="{{ asset('bundles/prode/js/scripts.js') }}"></script>
+               
+               <script type="text/javascript">
+
+               		$("#guardar").on("click", function() { 
+					    console.log("{{ (path('prode_homepage')) }}");
+					    var r1 = $('input[id="resultado1"]').val();
+					    var r2 = $('input[id="resultado2"]').val();	
+					    $.ajax({
+					                url: '{{ (path('prode_pronosticos')) }}',
+					                type: "POST",
+					                dataType: "json",
+					                 data: JSON.stringify({ r1: r1, r2: r2 }), 
+					                async: true,
+					                success: function (data)
+					                {
+					                    console.log(data)
+					                    $('div#ajax-results').html(data.output);
+
+					                }
+					            });
+						});
+               </script>
 {% endblock %}	

@@ -4,7 +4,6 @@ namespace ProdeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 
-
 /**
 * @ORM\Entity
 * @ORM\Table(name="Pronostico")
@@ -18,16 +17,13 @@ class Pronostico {
 	* @ORM\Column(type="integer")
 	* @ORM\GeneratedValue(strategy="AUTO")
 	*/
-	protected $pronostico_id;
+	protected $id;
 
-	
-    /**
-     * @ORM\ManyToOne(targetEntity="User") 
-     */
+	/** @ORM\Column(type="integer")*/
 	protected $idUser;
 
 	
-	/** @ORM\OneToOne(targetEntity="Partido", inversedBy="id") */
+	/** @ORM\ManyToOne(targetEntity="Partido", inversedBy="id") */
 	protected $idPartido;
 
 	/** @ORM\Column(type="string") */
@@ -37,9 +33,9 @@ class Pronostico {
 	protected $resultado2;
 
     /** @ORM\Column(type="boolean") */
-    protected $sp;
+    protected $sp = false;
 
-    /** @ORM\Column(type="boolean") */
+    /** @ORM\Column(type="boolean", nullable=true) */
     protected $pron;
 
     /** @ORM\Column(type="boolean") */
@@ -51,7 +47,7 @@ class Pronostico {
      */
     public function getId()
     {
-        return $this->pronostico_id;
+        return $this->id;
     }
 
 
@@ -69,7 +65,6 @@ class Pronostico {
      *
      * @return self
      */
-
     public function setIdUser($idUser)
     {
         $this->idUser = $idUser;

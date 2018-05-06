@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 */
 
 
+
 class Partido {
 
 	/**
@@ -20,13 +21,17 @@ class Partido {
 	protected $id;
 	/** @ORM\Column(type="string") */
 	protected $cod;
+	/** @ORM\Column(type="string", nullable=true) */
+	protected $grupo;
 	/** @ORM\Column(type="string") */
+
 	protected $equipo1;
-	/** @ORM\Column(type="integer") */
+	/** @ORM\Column(type="integer", nullable=true) */
 	protected $resultado1;
-	/** @ORM\Column(type="string") */
+	/** @ORM\Column(type="string", nullable=true) */
+
 	protected $equipo2;
-	/** @ORM\Column(type="integer") */
+	/** @ORM\Column(type="integer", nullable=true) */
 	protected $resultado2;
 	/** @ORM\Column(type="datetime") */
 	protected $fecha;
@@ -103,6 +108,17 @@ class Partido {
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
+
+    }
+
+        public function getGrupo()
+    {
+        return $this->grupo;
+    }
+
+    public function setGrupo($grupo)
+    {
+        $this->grupo = $grupo;
 
     }
 
