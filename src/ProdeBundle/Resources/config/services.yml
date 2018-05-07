@@ -1,4 +1,4 @@
 services:
-#    prode.example:
-#        class: AppBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+#    generar_pronosticos:
+#        class: Prode\ProdeBundle\Controller\
+#        arguments: ['@Notification'] 

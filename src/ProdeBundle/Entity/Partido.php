@@ -19,7 +19,9 @@ class Partido {
 	
 	*/
 	protected $id;
-	/** @ORM\Column(type="string") */
+	/**
+	* @ORM\OneToMany(targetEntity="Pronostico", mappedBy="idPartido")
+	*/
 	protected $cod;
 	/** @ORM\Column(type="string", nullable=true) */
 	protected $grupo;

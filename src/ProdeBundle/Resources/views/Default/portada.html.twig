@@ -32,29 +32,8 @@
 	</div>
 	
 	
-
-	<div class="partidos">
-		{% for partido in partidos %}
-		  <div class="partido">
-
-		  	<img src="{{ asset('bundles/prode/img/')}}{{partido.b1}}">
-		  	<span>{{partido.e1}}</span>
-		  	<span class="menos" id="menos1" role="button"
-		  	onselectstart="return false;">-</span>
-		  	<input class="resultado" id="resultado1" type="number" value="{{partido.resultado1}}" max="15">
-		  	<span class="mas" id="mas1" role="button"		
- 			onselectstart="return false;">+</span>
-		  	<img src="{{ asset('bundles/prode/img/') }}{{partido.b2}}">
-
-		  	<span>{{partido.e2}}</span>
-		  	<span class="menos" id="menos2">-</span>
-		  	<input class="resultado" id="resultado2" type="number" value="{{partido.resultado2}}" max="15">
-		  	<span class="mas" id="mas2">+</span>
-		
-		  	<div class="fecha"> {{ partido.fecha |date('d/m H:i  -  ')}} Grupo {{partido.grupo}}</div>
+		{% include 'ProdeBundle:Default:partidos.html.twig' %}
 	
-		  </div>
-		{% endfor %}
 		  
 	
 	</div>
@@ -65,28 +44,5 @@
 {% endblock %}	
 
 {% block javascripts %}
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-               <script src="{{ asset('bundles/prode/js/scripts.js') }}"></script>
-               
-               <script type="text/javascript">
-
-               		$("#guardar").on("click", function() { 
-					    console.log("{{ (path('prode_homepage')) }}");
-					    var r1 = $('input[id="resultado1"]').val();
-					    var r2 = $('input[id="resultado2"]').val();	
-					    $.ajax({
-					                url: '{{ (path('prode_pronosticos')) }}',
-					                type: "POST",
-					                dataType: "json",
-					                 data: JSON.stringify({ r1: r1, r2: r2 }), 
-					                async: true,
-					                success: function (data)
-					                {
-					                    console.log(data)
-					                    $('div#ajax-results').html(data.output);
-
-					                }
-					            });
-						});
-               </script>
+	{% include 'ProdeBundle:Default:javascript.html.twig' %}
 {% endblock %}	

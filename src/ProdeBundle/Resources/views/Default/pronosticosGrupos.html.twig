@@ -26,34 +26,22 @@
 			<a href="{{ path('grupo', {'grupo': grupo, 'active': 1}) }}" class="btn-grupo"> Grupo {{grupo}} </a>
 		{% endif %}
 	{% endfor %}
+	{% if app.user %}
+			<a href="#"  data-url="{{ (path('prode_homepage')) }}" class="btn-nav-guardar" id="guardar">GUARDAR</a>
+			 {% else %}
+			 	<div></div>
+	{% endif %}
 	</div>
 
-
-
-	<div class="partidos">
-		{% for partido in partidos %}
-		  <div class="partido">
-
-		  	<img src="{{ asset('bundles/prode/img/')}}{{partido.b1}}">
-		  	<span>{{partido.e1}}</span>
-		  	<span class="menos" id="menos1" role="button"
-		  	onselectstart="return false;">-</span>
-		  	<input class="resultado" id="resultado1" type="number" value="{{partido.resultado1}}" max="15">
-		  	<span class="mas" id="mas1" role="button"		
- 			onselectstart="return false;">+</span>
-		  	<img src="{{ asset('bundles/prode/img/') }}{{partido.b2}}">
-
-		  	<span>{{partido.e2}}</span>
-		  	<span class="menos" id="menos2">-</span>
-		  	<input class="resultado" id="resultado2" type="number" value="{{partido.resultado2}}" max="15">
-		  	<span class="mas" id="mas2">+</span>
-		
-		  	<div class="fecha"> {{ partido.fecha |date('d/m H:i  -  ')}} Grupo {{partido.grupo}}</div>
+		{% include 'ProdeBundle:Default:partidos.html.twig' %}	  
 	
-		  </div>
-		{% endfor %}
+	</div>
 {% endblock %}	
 
 {% block footer %}
 
+{% endblock %}	
+
+{% block javascripts %}
+	{% include 'ProdeBundle:Default:javascript.html.twig' %}
 {% endblock %}	

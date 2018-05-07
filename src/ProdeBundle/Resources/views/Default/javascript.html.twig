@@ -1,0 +1,25 @@
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+               <script src="{{ asset('bundles/prode/js/scripts.js') }}"></script>
+               
+               <script type="text/javascript">
+
+               		$("#guardar").on("click", function() { 
+					    console.log("{{ (path('prode_homepage')) }}");
+					    var r1 = $('input[id="resultado1"]').val();
+					    var r2 = $('input[id="resultado2"]').val();	
+					    var idPartido = $('.partido').attr('id');
+					    $.ajax({
+					                url: '{{ (path('prode_pronosticos')) }}',
+					                type: "POST",
+					                dataType: "json",
+					                 data: JSON.stringify({ r1: r1, r2: r2, id: idPartido }), 
+					                async: true,
+					                success: function (data)
+					                {
+					                    console.log(data)
+					                    $('div#ajax-results').html(data.output);
+
+					                }
+					            });
+						});
+               </script>

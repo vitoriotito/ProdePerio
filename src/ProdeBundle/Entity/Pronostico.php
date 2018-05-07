@@ -23,7 +23,8 @@ class Pronostico {
 	protected $idUser;
 
 	
-	/** @ORM\ManyToOne(targetEntity="Partido", inversedBy="id") */
+	/** @ORM\ManyToOne(targetEntity="Partido", inversedBy="cod") */
+   
 	protected $idPartido;
 
 	/** @ORM\Column(type="string") */

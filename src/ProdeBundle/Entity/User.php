@@ -47,8 +47,7 @@ class User extends BaseUser
     {
         parent::__construct();
         $this -> setFechAlta(new \DateTime('now'));
-
-
+        
     }
 
 

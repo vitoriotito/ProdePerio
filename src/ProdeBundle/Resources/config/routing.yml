@@ -3,8 +3,8 @@ prode_homepage:
     defaults: { _controller: ProdeBundle:Default:index }
 
 prode_pronosticos:
-    path:     /pronosticosGrupos
-    defaults: { _controller: ProdeBundle:Default:pronosticosGrupos } 
+    path:     /guardar_pronosticos
+    defaults: { _controller: ProdeBundle:Default:guardarPronosticos } 
 
 grupo:
     path:     /grupo/{grupo}
@@ -29,3 +29,7 @@ logout:
 guardar_grupo:
   pattern:  /guardarGrupo
   defaults: { _controller: ProdeBundle:Default:guardarGrupo }
+
+generar_pronosticos:
+  pattern: /gp
+  defaults: { _controller: ProdeBundle:Default:generarPronosticos }

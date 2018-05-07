@@ -20,6 +20,31 @@ class DefaultController extends Controller
 
 
 
+	public function generarPronosticosAction() {
+	
+		$user = $this->container->get('security.context')->getToken()->getUser();
+		$id = $user->getId();
+		$em = $this->getDoctrine()->getEntityManager();
+		$partidos = $this->getDoctrine()->getRepository('ProdeBundle:Partido')->findAll();
+
+
+		foreach ($partidos as $pa) {
+		    $p = new Pronostico();
+		    $p->setIdUser($id);
+		    $p->setResultado1(0);
+		    $p->setResultado2(0);
+		    $p->setSp(false);
+		    $p->setRes(false);
+		    $p->setPron(false);
+		    $p->setIdPartido($pa);
+		    $em->persist($p);
+	}
+
+			$em->flush();
+
+			return $this->indexAction();
+	}
+
 	public function ayudaAction()
 	{
 		return new Response('Ayuda');
@@ -28,9 +53,9 @@ class DefaultController extends Controller
 	private function findProximosPartidos($cantidad)
 	{
 		$em = $this->getDoctrine()->getEntityManager();
-		$query = $em->createQuery('SELECT equipo1.nombre e1, equipo1.bandera b1, equipo2.nombre e2, equipo2.bandera b2, partido.fecha, partido.resultado1, partido.resultado2, partido.grupo
+		$query = $em->createQuery('SELECT equipo1.nombre e1, equipo1.bandera b1, equipo2.nombre e2, equipo2.bandera b2, partido.fecha, partido.resultado1, partido.resultado2, partido.grupo, partido.id id
 			FROM ProdeBundle:Equipo equipo1 JOIN ProdeBundle:Partido partido WITH
-			equipo1.cod = partido.equipo1 JOIN ProdeBundle:Equipo equipo2  WITH equipo2.cod = partido.equipo2')
+			equipo1.cod = partido.equipo1 JOIN ProdeBundle:Equipo equipo2 WITH equipo2.cod = partido.equipo2')
 			 ->setMaxResults($cantidad)->getResult();
 		return $query;	 
 	}
@@ -38,10 +63,10 @@ class DefaultController extends Controller
 	private function findPartidosPorGrupo($grupo)
 	{
 		$parameters = array(
-						    'grupo' => $grupo
+							'grupo' => $grupo
 							);
 		$em = $this->getDoctrine()->getEntityManager();
-		$query = $em->createQuery('SELECT equipo1.nombre e1, equipo1.bandera b1, equipo2.nombre e2, equipo2.bandera b2, partido.fecha, partido.resultado1, partido.resultado2, partido.grupo
+		$query = $em->createQuery('SELECT equipo1.nombre e1, equipo1.bandera b1, equipo2.nombre e2, equipo2.bandera b2, partido.fecha, partido.resultado1, partido.resultado2, partido.grupo, partido.id id
 			FROM ProdeBundle:Equipo equipo1 JOIN ProdeBundle:Partido partido WITH
 			equipo1.cod = partido.equipo1 JOIN ProdeBundle:Equipo equipo2  WITH equipo2.cod = partido.equipo2
 			WHERE partido.grupo=:grupo
@@ -59,8 +84,7 @@ class DefaultController extends Controller
 			
 		$em = $this->getDoctrine()->getEntityManager();
 		
-		return $this->render('ProdeBundle:Default:portada.html.twig', array(
-							 'partidos' => $partidos));
+		return $this->render('ProdeBundle:Default:portada.html.twig', array('partidos' => $partidos));
 	}
 
 	
@@ -79,7 +103,7 @@ class DefaultController extends Controller
     
 
 
-    public function guardarPronosticoAction(Request $request)
+    public function guardarPronosticosAction(Request $request)
     {
     	$params = array();
     	$content = $this->get("request")->getContent();
@@ -90,11 +114,11 @@ class DefaultController extends Controller
  		
 
 		$user = $this->container->get('security.context')->getToken()->getUser();
-		$user->getId();
+		
 
         $p = $this->getDoctrine()
         ->getRepository(Partido::class)
-        ->find(1);
+        ->find($params['id']);
  
 
 		$pronostico = new Pronostico();
@@ -102,6 +126,8 @@ class DefaultController extends Controller
 		$pronostico->setIdPartido($p);
 		$pronostico->setResultado1($params['r1']);
 		$pronostico->setResultado2($params['r2']);
+		$pronostico->setRes(false);
+		$pronostico->setPron(false);
 		$pronostico->setSp(false);
 		$em = $this->getDoctrine()->getEntityManager();
  
@@ -110,6 +136,8 @@ class DefaultController extends Controller
  
         //Insertarmos en la base de datos
         $flush = $em->flush();
+
+        return $this->render('ProdeBundle:Default:base.html.twig');
 
     }
 
