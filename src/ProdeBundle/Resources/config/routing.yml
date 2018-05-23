@@ -2,13 +2,25 @@ prode_homepage:
     path:     /
     defaults: { _controller: ProdeBundle:Default:index }
 
+calcular:
+    path:     /calcular
+    defaults: { _controller: ProdeBundle:Default:calcular }
+
 prode_pronosticos:
     path:     /guardar_pronosticos
     defaults: { _controller: ProdeBundle:Default:guardarPronosticos } 
 
+guardar_resultados:
+    path:     /guardar_resultados
+    defaults: { _controller: ProdeBundle:Default:guardarResultados }     
+
 grupo:
     path:     /grupo/{grupo}
     defaults: { _controller: ProdeBundle:Default:grupo }    
+
+verTodos:
+    path:     /todos
+    defaults: { _controller: ProdeBundle:Default:verTodosPronosticos }  
 
 grupoA:
     path:     /grupo/A

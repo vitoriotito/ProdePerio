@@ -27,7 +27,7 @@ class Pronostico {
    
 	protected $idPartido;
 
-	/** @ORM\Column(type="string") */
+	/** @ORM\Column(type="integer") */
 	protected $resultado1;
 
 	/** @ORM\Column(type="integer") */

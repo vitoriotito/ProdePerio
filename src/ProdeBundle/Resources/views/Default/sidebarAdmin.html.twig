@@ -1,0 +1,53 @@
+<div class="partidosSide">
+		{% if partidosSidebar|length > 0 %}
+			{% for partidoSide in partidosSidebar %}
+			{% set terminoS = partidoSide.fecha | date_modify("+2 hour") %}
+					{% if date("now") > terminoS and partidoSide.calculado == 0 %}
+						<div class="partidoSide sinResultado" id="{{partidoSide.id}}">
+					{% endif %}	
+					{% if date("now") < terminoS and date("now") > partidoSide.fecha %}
+						<div class="partidoSide enjuego" id="{{partidoSide.id}}">
+					{% endif %}	
+					{% if date("now") > terminoS and partidoSide.calculado == 1 %}
+						<div class="partidoSide conResultado" id="{{partidoSide.id}}">
+					{% endif %}	
+					{% if date("now") < partidoSide.fecha  %}
+						<div class="partidoSide" id="{{partidoSide.id}}">
+					{% endif %}
+
+
+							<img src="{{ asset('bundles/prode/img/')}}{{partidoSide.b1}}">
+							<span>{{partidoSide.e1}}</span>
+							
+							<span class="resultado">
+								{% if partidoSide.resultado1 is null %}
+									-
+								{% else %}
+									{{partidoSide.resultado1}}
+								{% endif %}	
+							</span>
+							<img src="{{ asset('bundles/prode/img/') }}{{partidoSide.b2}}">
+
+							<span>{{partidoSide.e2}}</span>
+
+
+								<span class="resultado">
+								{% if partidoSide.resultado2 is null %}
+									-
+								{% else %}
+									{{partidoSide.resultado2}}
+								{% endif %}	
+							</span>
+						<div></div><div></div>
+						<div class="fechaSidebar">{{ partidoSide.fecha |date('d/m H:i')}} </div>
+						<div></div><div></div><div></div>
+					
+							
+						</div>
+					
+				
+					
+			{% endfor %}
+
+		{% endif %}		
+</div>		

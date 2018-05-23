@@ -2,9 +2,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>{% block title %}{% endblock %} | Prode</title>  
              {% block stylesheets %}         
-            	<link href="{{ asset('bundles/prode/css/styles.css') }}"
+            	<link href="/bundles/prode/css/styles.css"
 				rel="stylesheet" type="text/css" />
                 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans" rel="stylesheet">
                 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -22,18 +24,28 @@
                         <a href="{{ path('prode_homepage') }}" class="header-titulo">
                             PRODE PERIO RUSIA 2018
                         </a>
-                        <div class="header-center">
-                        </div>    
+ 
                         
                            {% if app.user %}
                             <div class="text-header">
                                 Hola {{app.user.nombre}}
                             </div>
+
+                             {% if is_granted('ROLE_ADMIN') ==    false %}
                             <div class="header-login">
                                 <a href="{{ path('grupoA') }}" class="btn-header">
-                                   Mis grupos
-                                </a>                  
-                            </div>
+                                   Grupos
+                                </a>  
+
+                            </div>   
+                            <div class="header-login">
+                                <a href="{{ path('grupoA') }}" class="btn-header">
+                                   Fase
+                                </a>  
+               
+                            </div>  
+                            {% endif %}
+
                              <div class="header-login">
                                 <a href="{{ path('logout') }}" class="btn-header">
                                     Salir

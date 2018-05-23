@@ -31,6 +31,14 @@ class User extends BaseUser
 	/** @ORM\Column(type="string") */
 	protected $equipo;
 
+    /**
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 18000,
+     *      minMessage = "You must be at least {{ limit }}cm tall to enter",
+     *      maxMessage = "You cannot be taller than {{ limit }}cm to enter"
+     * )
+     */
 	/** @ORM\Column(type="integer") */
 	protected $legajo;
 
@@ -40,6 +48,21 @@ class User extends BaseUser
     
     protected $pronosticos;
 
+    /** @ORM\Column(type="integer", nullable=true) */
+    protected $puntos;
+    
+    /** @ORM\Column(type="integer") */
+    protected $sp;
+    
+    /** @ORM\Column(type="integer") */
+    protected $pron;
+    
+    /** @ORM\Column(type="integer") */
+	protected $res;
+
+    /** @ORM\Column(type="boolean") */
+    protected $ad;
+
 
 
 
@@ -47,6 +70,11 @@ class User extends BaseUser
     {
         parent::__construct();
         $this -> setFechAlta(new \DateTime('now'));
+        $this -> setPuntos(0);
+        $this -> setSp(0);
+        $this -> setPron(0);
+        $this -> setRes(0);
+        $this -> setAd(0);
         
     }
 
@@ -169,4 +197,136 @@ class User extends BaseUser
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPuntos()
+    {
+        return $this->puntos;
+    }
+
+    /**
+     * @param mixed $puntos
+     *
+     * @return self
+     */
+    public function setPuntos($puntos)
+    {
+        $this->puntos = $puntos;
+
+        return $this;
+    }
+
+      /**
+     * @return mixed
+     */
+    public function getSp()
+    {
+        return $this->sp;
+    }
+
+    /**
+     * @param mixed $sp
+     *
+     * @return self
+     */
+    public function setSp($sp)
+    {
+
+        $this->sp = $sp;
+
+        return $this;
+    }
+
+    public function sumSp()
+    {
+        $this->sp++;
+        $this->pron--;
+        return $this;
+    }
+
+      /**
+     * @return mixed
+     */
+    public function getRes()
+    {
+        return $this->res;
+    }
+
+    /**
+     * @param mixed $res
+     *
+     * @return self
+     */
+    public function setRes($res)
+    {
+        $this->res = $res;
+
+        return $this;
+    }
+
+    public function sumRes()
+    {
+        $this->res++;
+        return $this;
+    }
+
+      /**
+     * @return mixed
+     */
+    public function getPron()
+    {
+        return $this->pron;
+    }
+
+    /**
+     * @param mixed $pron
+     *
+     * @return self
+     */
+    public function setPron($pron)
+    {
+        $this->pron = $pron;
+
+        return $this;
+    }
+
+    public function sumPron()
+    {
+        $this->pron++;
+        return $this;
+    }
+
+    public function calcularPuntos($r, $s, $p){
+        $pts = $this->getRes() * $r + $this->getSp() * $p + $this->getPron() * $s;
+        $this->setPuntos($pts);
+    }
+
+    public function resetearUser() {
+        $this -> setPuntos(0);
+        $this -> setSp(0);
+        $this -> setPron(0);
+        $this -> setRes(0);
+        return $this;
+    }
+
+        public function getAd()
+    {
+        return $this->ad;
+    }
+
+    /**
+     * @param mixed $ad
+     *
+     * @return self
+     */
+    public function setAd($ad)
+    {
+        $this->ad = $ad;
+
+        return $this;
+    }
+
+
 }

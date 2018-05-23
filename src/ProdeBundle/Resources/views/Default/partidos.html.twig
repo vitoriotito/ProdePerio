@@ -1,22 +1,112 @@
 <div class="partidos">
 		{% for partido in partidos %}
-		  <div class="partido" id="{{partido.id}}">
+		{% set deadline = partido.fecha | date_modify("-1 hour") %}
+				{% if date("now") < deadline %}
+					<div class="partido" id="{{partido.id}}">
 
-		  	<img src="{{ asset('bundles/prode/img/')}}{{partido.b1}}">
-		  	<span>{{partido.e1}}</span>
-		  	<span class="menos" id="menos1" role="button"
-		  	onselectstart="return false;">-</span>
-		  	<input class="resultado" id="resultado1" type="number" value="{{partido.resultado1}}" max="15">
-		  	<span class="mas" id="mas1" role="button"		
- 			onselectstart="return false;">+</span>
-		  	<img src="{{ asset('bundles/prode/img/') }}{{partido.b2}}">
+						<img src="{{ asset('bundles/prode/img/')}}{{partido.b1}}">
+						<span>{{partido.e1}}</span>
+						
+						<span class="menos" id="menos" role="button"
+						onselectstart="return false;">-</span>
+							{% if app.user %}
+								{% if partido.pro1 is not null %}
+								   <input class="resultado"  id= "l{{loop.index}}" type="number" value="{{partido.pro1}}" max="15">
+								{% else %}
+									<input class="resultado"  id= "l{{loop.index}}" type="number" value="" max="15">
+								{% endif %}	
+							{% else %}
+								<input class="resultado"  id= "l{{loop.index}}" type="number" value="0" max="15">
+							{% endif %}
+						<span class="mas" id="mas" role="button"		
+						onselectstart="return false;">+</span>
+						<img src="{{ asset('bundles/prode/img/') }}{{partido.b2}}">
 
-		  	<span>{{partido.e2}}</span>
-		  	<span class="menos" id="menos2">-</span>
-		  	<input class="resultado" id="resultado2" type="number" value="{{partido.resultado2}}" max="15">
-		  	<span class="mas" id="mas2">+</span>
+						<span>{{partido.e2}}</span>
+						<span class="menos" id="menos">-</span>
+							{% if app.user %}
+								{% if partido.pro2 is not null %}
+								   <input class="resultado"  id= "v{{loop.index}}" type="number" value="{{partido.pro2}}" max="15">
+								{% else %}
+									<input class="resultado"  id= "v{{loop.index}}" type="number" value="" max="15">
+								{% endif %}	
+							{% else %}
+								<input class="resultado"  id= "v{{loop.index}}" type="number" value="0" max="15">
+							{% endif %}
+						<span class="mas" id="mas">+</span>
+					
+						<span class="fecha"> {{ partido.fecha |date('d/m H:i  -  ')}} Grupo {{partido.grupo}}</span>
+						
+					</div>
+				{% else %}	
+						{# {% set termino = partido.fecha | date_modify("+2.5 hour") %} #}
+					
+
+						{% set termino = partido.fecha|date_modify("+2.02 hour") %}  
+						
+						{% if partido.res > 0 %}	
+						<div class="partido res" id="{{partido.id}}">
+						{% elseif partido.plen > 0 %}	
+						<div class="partido pleno" id="{{partido.id}}">
+						{% elseif partido.sp > 0 %}	
+						<div class="partido superpleno" id="{{partido.id}}">
+						{% else %}
+						<div class="partido" id="{{partido.id}}">
+						{% endif %}		
+						<img src="{{ asset('bundles/prode/img/')}}{{partido.b1}}">
+						<span>{{partido.e1}}</span>
+						
+						<span  ></span>
+							{% if app.user %}
+								<input class="resultado"  id= "l{{loop.index}}" type="number" value="{{partido.pro1}}" max="15" disabled>
+							{% else %}
+								<input class="resultado"  id= "l{{loop.index}}" type="number" value="0" max="15" disabled>
+							{% endif %}
+
+						{% if date("now") > termino %}
+							{% if partido.resultado1 is not null %}	
+								<span class="resultado-finalizado">{{partido.resultado1}}</span>
+							{% else %}
+								<span class="resultado-finalizado">-</span>
+							{% endif %}	
+						{% else %}
+							<span class="resultado-finalizado">-</span>
+						{% endif %}
+
+						<img src="{{ asset('bundles/prode/img/') }}{{partido.b2}}">
+
+						<span>{{partido.e2}}</span>
+						<span  id="menos"></span>
+							{% if app.user %}
+								<input class="resultado" id= "v{{loop.index}}" type="number" value="{{partido.pro2}}" max="15" disabled>
+							{% else %}
+								<input class="resultado" id= "v{{loop.index}}" type="number" value="0" max="15" disabled>
+							{% endif %}
+						
 		
-		  	<div class="fecha"> {{ partido.fecha |date('d/m H:i  -  ')}} Grupo {{partido.grupo}}</div>
-	
-		  </div>
+						
+						
+						{% if date("now") > termino %}	
+							{% if partido.resultado2 is not null %}	
+								<span class="resultado-finalizado">{{partido.resultado2}}</span>
+							{% else %}
+								<span class="resultado-finalizado">-</span>
+							{% endif %}	
+						{% else  %}
+						<span class="resultado-finalizado">-</span>
+						{% endif %}
+
+						<span class="fecha"> {{ partido.fecha |date('d/m H:i  -  ')}} Grupo {{partido.grupo}}</span>
+						
+						
+						{% if date("now") < partido.fecha and date("now") > deadline %}
+							<span class="estado cerrado">CERRADO</span>
+						{% elseif date("now") > partido.fecha and date("now") < termino %}	
+							<span class="estado enjuego">EN JUEGO</span>
+						{% elseif date("now") > termino %}	
+							<span class="estado">FINALIZADO</span>
+						{% endif %}
+					</div>
+				{% endif %}
+				
 		{% endfor %}

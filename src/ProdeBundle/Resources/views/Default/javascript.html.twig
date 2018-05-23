@@ -1,18 +1,95 @@
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                <script src="{{ asset('bundles/prode/js/scripts.js') }}"></script>
                
+			   
+			   {% if is_granted('ROLE_ADMIN') %}
+			   	<script type="text/javascript">
+
+               		$("#guardar").on("click", function() { 
+						   	 var count = 0;
+							var pronosticos = [];	
+					        $('div','.partidos').each(function(){
+								count++;
+								var l = "l"
+								l = l.concat(count.toString());
+								var v = "v";
+								v = v.concat(count.toString());
+								var p = {};
+								p["id"] = $(this).attr('id');
+								p["r1"]  = document.getElementById(l).value;
+								p["r2"]  = document.getElementById(v).value;
+								pronosticos.push(p);
+     							var idPartidos = []; 
+							  idPartidos.push($(this).attr('id')); 
+						
+    						});
+							console.log(pronosticos);
+					    var r1 = $('input[id="resultado1"]').val();
+					    var r2 = $('input[id="resultado2"]').val();	
+					    var idPartido = $('.partido').attr('id');
+
+					    $.ajax({
+									
+					                url: '{{ (path('guardar_resultados')) }}',
+					                type: "POST",
+					                dataType: "json",
+					                 data: JSON.stringify(pronosticos), 
+					                async: true,
+					                success: function (data)
+					                {
+					                    
+										
+
+					                }
+					            });
+								$('#1').remove();
+								window.location.reload();
+						});
+               </script>
+
+			   {% else %}
                <script type="text/javascript">
 
                		$("#guardar").on("click", function() { 
-					    console.log("{{ (path('prode_homepage')) }}");
+						   	 var count = 0;
+							var pronosticos = [];	
+					        $('div','.partidos').each(function(){
+								count++;
+								var l = "l"
+								l = l.concat(count.toString());
+								var v = "v";
+								v = v.concat(count.toString());
+								var p = {};
+								p["id"] = $(this).attr('id');
+								var r1 = document.getElementById(l).value;
+								    if (!jQuery.isNumeric(r1)){
+     									 p["r1"]  = "n";
+    								} else {
+    									p["r1"]  = document.getElementById(l).value;
+    								}
+								
+								var r2 = document.getElementById(v).value;
+								    if (!jQuery.isNumeric(r2)){
+     									 p["r2"]  = "n";
+    								} else {
+    									p["r2"]  = document.getElementById(v).value;
+    								}
+
+								pronosticos.push(p);
+     							var idPartidos = []; 
+							  idPartidos.push($(this).attr('id')); 
+						
+    						});
+							console.log(pronosticos);
 					    var r1 = $('input[id="resultado1"]').val();
 					    var r2 = $('input[id="resultado2"]').val();	
 					    var idPartido = $('.partido').attr('id');
 					    $.ajax({
+									
 					                url: '{{ (path('prode_pronosticos')) }}',
 					                type: "POST",
 					                dataType: "json",
-					                 data: JSON.stringify({ r1: r1, r2: r2, id: idPartido }), 
+					                 data: JSON.stringify(pronosticos), 
 					                async: true,
 					                success: function (data)
 					                {
@@ -23,3 +100,5 @@
 					            });
 						});
                </script>
+
+			{% endif %}

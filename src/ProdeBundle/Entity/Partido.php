@@ -37,7 +37,22 @@ class Partido {
 	protected $resultado2;
 	/** @ORM\Column(type="datetime") */
 	protected $fecha;
+	/** @ORM\Column(type="boolean", nullable=true) */
+	protected $calculado;
+	
 
+
+	
+    public function __construct()
+    {
+        parent::__construct();
+        $this -> setCalculado(false);
+        
+	}
+	
+	public function getId() {
+		return $this->id;
+	}
 	
 	public function getIdpartido()
 	{
@@ -68,7 +83,7 @@ class Partido {
 
 	public function setResultado1($resultado1)
 	{
-		$this->cod = $resultado1;
+		$this->resultado1 = $resultado1;
 	}
 
 	public function getEquipo1()
@@ -98,7 +113,7 @@ class Partido {
 
 	public function setResultado2($resultado2)
 	{
-		$this->cod = $resultado2;
+		$this->resultado2 = $resultado2;
 	}
 
 
@@ -121,6 +136,17 @@ class Partido {
     public function setGrupo($grupo)
     {
         $this->grupo = $grupo;
+
+	}
+	
+	public function getCalculado()
+    {
+        return $this->calculado;
+    }
+
+    public function setCalculado($calculado)
+    {
+        $this->calculado = $calculado;
 
     }
 

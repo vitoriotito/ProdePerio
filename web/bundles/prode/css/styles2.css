@@ -105,9 +105,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .content form {
   display: grid;
-  grid-template-columns: 1fr ;
+  grid-template-columns: 1fr 1fr 3fr;
   padding: 15px;
-  max-width: 300px;
 }
 
 .content form *{
@@ -139,16 +138,15 @@ input[type=checkbox] {
 }
 
 .grupos {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr) 2fr;
-    /* padding: 2px; */
-    background-color: #fff;
-    border: 2px solid #e6e8e8;
-    margin-top: 5px;
-    margin-bottom: 2px;
-    font-weight: 600;
-    color: #6968af;
-    text-align: center;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  /* padding: 2px; */
+  background-color: #fff;
+  border: 2px solid #e6e8e8;
+  margin-top: 5px;
+  margin-bottom: 2px;
+  font-weight: 600;
+  color: #6968af;
 }
 
 .btn-grupo{
@@ -235,18 +233,6 @@ input[type=checkbox] {
   grid-template-columns: 1fr 1fr;
   grid-gap: 5px;
 
-}
-
-.res {
-  background-color: #dbd7ef !important;
-}
-
-.pleno {
-  background-color: #b2d6af !important;
-}
-
-.superpleno {
-  background-color: #94f07a !important;
 }
 
 .partido {
@@ -448,14 +434,6 @@ input[type=checkbox] {
       justify-self: center;
     }
 
-    .g-recaptcha {
-      grid-area: 8 / 2 / 8 /4;
-    }
-
-    .formularioRegistro {
-      display: grid;
-      grid-template-columns: 150px auto;
-
 
 }
 
@@ -509,7 +487,7 @@ input[type=checkbox] {
     .grupos {
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: 1fr 1fr;
-          font-size: 85%;
+          font-size: 91%;
 
     }
 
@@ -520,12 +498,5 @@ input[type=checkbox] {
       justify-self: center;
     }
 
-    
-    .g-recaptcha {
-      grid-area: 8 / 2 / 8 /4;
-    }
-    
-    .content .form {
-        grid-template-columns: 1fr;
-    }
+
 }

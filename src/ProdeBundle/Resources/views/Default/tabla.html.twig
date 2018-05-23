@@ -1,33 +1,61 @@
-	<div class="tabla">
+	<div class="tabla" style="text-align: center">
 		<div> Pos </div>
 		<div> Nombre </div>
-		<div> Ptos </div>
+		<div> Pts </div>
 		<div> SP </div>
 		<div> P </div>
 		<div> R </div>
 	
-
-		<div> 1 </div>
-		<div> PepePepe </div>
-		<div> 45 </div>
-		<div> 3 </div>
-		<div> 2 </div>
-		<div> 6 </div>
 	
 
-		<div> 2 </div>
-		<div> PepePepe </div>
-		<div> 45 </div>
-		<div> 3 </div>
-		<div> 2 </div>
-		<div> 6 </div>
+	{% for usuario in usuarios|slice(0, 20) %}
+		{% if app.user %}
+			{% if usuario.id == app.user.id %}
+				<div style="background-color: #ffa862; color:white"> {{loop.index}} </div>
+				<div style="background-color: #ffa862; color:white; text-align:left"> {{usuario.nombre}} </div>
+				<div style="background-color: #ffa862; color:white"> {{usuario.puntos}} </div>
+				<div style="background-color: #ffa862; color:white"> {{usuario.sp}} </div>
+				<div style="background-color: #ffa862; color:white"> {{usuario.pron}} </div>
+				<div style="background-color: #ffa862; color:white"> {{usuario.res}} </div>
+			{% else %}	
+				<div> {{loop.index}} </div>
+				<div style="text-align:left"> {{usuario.nombre}} </div>
+				<div> {{usuario.puntos}} </div>
+				<div> {{usuario.sp}} </div>
+				<div> {{usuario.pron}} </div>
+				<div> {{usuario.res}} </div>
+			{% endif %}	
+		{% else %}	
+				<div> {{loop.index}} </div>
+				<div style="text-align:left"> {{usuario.nombre}} </div>
+				<div> {{usuario.puntos}} </div>
+				<div> {{usuario.sp}} </div>
+				<div> {{usuario.pron}} </div>
+				<div> {{usuario.res}} </div>
+		{% endif %}		
+	{% endfor %}
 
 
-			<div> 3 </div>
-		<div> PepePepe </div>
-		<div> 45 </div>
-		<div> 3 </div>
-		<div> 2 </div>
-		<div> 6 </div>
 
+	
 	</div>
+
+
+	</br>
+	{% if app.user %}
+	<div class="tabla" style="text-align: center">
+				<div></div>
+				<div> Mi Posición</div>
+				<div> </div>
+				<div>  </div>
+				<div>  </div>
+				<div> </div>
+				<div style="background: #677c80; color: white"> 
+					{{pos}} </div>
+				<div style="text-align: left"> {{me.nombre}} </div>
+				<div> {{me.puntos}} </div>
+				<div> {{me.sp}} </div>
+				<div> {{me.pron}} </div>
+				<div> {{me.res}} </div>
+	</div>
+	{% endif %}

@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use ProdeBundle\Entity\User;
 
+
 class RegistrationType extends AbstractType
 {
     private $class;
@@ -31,6 +32,7 @@ class RegistrationType extends AbstractType
         ->add('apellido', null, array('label' => 'Apellido', 'translation_domain' => 'FOSUserBundle'))
         ->add('legajo', null, array('label' => 'Legajo', 'translation_domain' => 'FOSUserBundle'))
         ->add('equipo', null, array('label' => 'Equipo', 'translation_domain' => 'FOSUserBundle'))
+        
         ;
     }
     public function getParent()

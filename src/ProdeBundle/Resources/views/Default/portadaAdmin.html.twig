@@ -13,7 +13,9 @@
 {% endblock %}	
 
 {% block sidebar %}
-	{% include 'ProdeBundle:Default:tabla.html.twig' %}
+
+		{% include 'ProdeBundle:Default:sidebarAdmin.html.twig' %}
+
 {% endblock %}	
 
 {% block content %}
@@ -21,7 +23,7 @@
 
 	<div class="contentNav">
 		<div></div>
-		<div class="banner"> Próximos Partidos </div>
+		<div class="banner"> Partidos sin cargar</div>
 		<div class= "left-banner">
 			 {% if app.user %}
 			<a href="#"  data-url="{{ (path('prode_homepage')) }}" class="btn-nav" id="guardar">GUARDAR</a>
@@ -32,11 +34,8 @@
 	</div>
 	
 	
-		{% include 'ProdeBundle:Default:partidos.html.twig' %}
-		{% if app.user %}
-			<a href="{{ (path('verTodos')) }}"   id="">Ver todos</a>
-		{% endif %}	
-
+		{% include 'ProdeBundle:Default:partidosAdmin.html.twig' %}
+	
 		  
 	
 	</div>

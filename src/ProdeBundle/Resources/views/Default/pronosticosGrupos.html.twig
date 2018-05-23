@@ -20,10 +20,10 @@
 
 	<div class="grupos">
 	{% for grupo in 'A'..'H' %}
-		{% if grupo == partidos[1].grupo %}
+		{% if grupo == partidos[0].grupo %}
 			<a class="btn-grupo btn-grupo-elegido "> Grupo {{grupo}} </a>
 		{% else %}
-			<a href="{{ path('grupo', {'grupo': grupo, 'active': 1}) }}" class="btn-grupo"> Grupo {{grupo}} </a>
+			<a href="{{ path('grupo', {'grupo': grupo }) }}" class="btn-grupo"> Grupo {{grupo}} </a>
 		{% endif %}
 	{% endfor %}
 	{% if app.user %}
